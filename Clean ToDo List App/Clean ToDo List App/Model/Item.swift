@@ -9,19 +9,31 @@
 import Foundation
 
 struct Item {
+    let id: UInt
+    
     let name: String
     let comments: String
     
-    let dueDate: Data
-    var completionDate: Data?
+    let dueDate: Date
+    var completionDate: Date?
     
-    var isComplited: Bool {
+    var isCompleted: Bool {
         return completionDate != nil
     }
     
-    init(name: String, comments: String = "", dueDate:Data) {
+    private static var currentID: UInt = 0
+    
+    init(name: String, comments: String = "", dueDate:Date) {
         self.name = name
         self.comments = comments
         self.dueDate = dueDate
+        self.id = Item.currentID
+        Item.currentID += 1
+    }
+}
+
+extension Item: Equatable {
+    static func ==(lhs: Item, rhs: Item) -> Bool {
+        return lhs.id == rhs.id
     }
 }
