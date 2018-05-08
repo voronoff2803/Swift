@@ -11,9 +11,17 @@ import UIKit
 class MainViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func addItemBarButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: "AddItem", sender: self)
+    }
+    
     let headerTitles = ["Active", "Complited"]
     
-    var items = [Item]()
+    var items = [Item]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     var completedItems: [Item] {
         return items.filter{$0.isCompleted}
     }
@@ -80,6 +88,24 @@ extension MainViewController: UITableViewDataSource {
         cell.detailTextLabel?.text = "\(item.dueDate)"
         
         return cell
+    }
+}
+
+extension MainViewController: DetailViewControllDelegate {
+    func detailViewController(_ controller: DetailViewController, didFinishAdding item: Item) {
+        //Добавялем полученный объект в массив
+        items.append(item)
+        //Перезагружаем данные
+        tableView.reloadData()
+        //Убираем верхний контроллер
+        navigationController?.popViewController(animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //Тогда мы можем извлечь контроллер и задать ему идентификатор
+        if let addingController = segue.destination as? DetailViewController {
+            addingController.delegate = self
+        }
     }
 }
 
