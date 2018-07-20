@@ -1,0 +1,21 @@
+{
+  "Mac" : [
+    {
+      "name" : "SwiftyVK",
+      "hash" : "99d5cffd8d04db6a9c93d53f87669619025b475addbbdc71cd6fe1c724f1b513"
+    }
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "3.1.8",
+  "iOS" : [
+    {
+      "name" : "SwiftyVK",
+      "hash" : "3334e30ba5ec5f231250c98be6574c540c8d44c0cbe806956affe9d7dc61eeda"
+    }
+  ]
+}
